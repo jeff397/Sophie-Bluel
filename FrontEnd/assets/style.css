@@ -126,7 +126,8 @@ li:hover {
 	margin-bottom: 1em;
 }
 .filter-container {
-	width: 70%;
+	min-width: 585px;
+	width: 63%;
 	display: flex;
 	margin: 50px auto;
 	justify-content: space-evenly;
@@ -140,6 +141,7 @@ li:hover {
 	border: 1px solid #1D6154;
 	border-radius: 60px;
 	padding: 9px 30px;
+	cursor: pointer;
 }
 
 .filter-container>div:hover {
