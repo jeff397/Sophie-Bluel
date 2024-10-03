@@ -3,7 +3,17 @@ createButtons();
 async function createButtons(){
     const categories = await getCategories();
     console.log(categories);
+    categories.forEach((categories) => {
+      setButtons(categories);
+    });
+    
        
+}
+
+function setButtons(data) {
+  const div = document.createElement("div");
+  div.innerHTML = `${data.name}`;
+  document.querySelector(".filter-container").append(div);
 }
 
 createGallery();
