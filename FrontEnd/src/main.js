@@ -12,15 +12,20 @@ async function createGallery() {
 const works = await getWorks();
 console.log(works);
 
+for (let i=0; i<works.length; i++) {
+  
+  setImages(works[i]);
+
+  }
+
 }
 
 function setImages(data) {
 const figure = document.createElement("figure");
-figure.innerHTML = '<img src=${data[i].imageUrl} alt=${data[i].title}><figcaption>${data[i].title}</figcaption>';
+figure.innerHTML = `<img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption>`;
 
-document.body.append(figure);
+const gallery = document.querySelector(".gallery"); 
+  gallery.appendChild(figure);
+  
 }
-        
-
-
 
