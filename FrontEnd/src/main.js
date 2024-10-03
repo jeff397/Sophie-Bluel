@@ -24,8 +24,7 @@ function setImages(data) {
 const figure = document.createElement("figure");
 figure.innerHTML = `<img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption>`;
 
-const gallery = document.querySelector(".gallery"); 
-  gallery.appendChild(figure);
+document.querySelector(".gallery").append(figure);
   
 }
 
