@@ -11,13 +11,10 @@ createGallery();
 async function createGallery() { 
 const works = await getWorks();
 console.log(works);
-
-for (let i=0; i<works.length; i++) {
-  
-  setImages(works[i]);
-
-  }
-
+const gallery = document.querySelector(".gallery");
+works.forEach((works) => {
+  setImages(works, gallery);
+});
 }
 
 function setImages(data) {
