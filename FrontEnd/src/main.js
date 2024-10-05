@@ -3,17 +3,18 @@ createButtons();
 async function createButtons(){
     const categories = await getCategories();
     console.log(categories);
-    categories.forEach((categories) => {
-      setButtons(categories);
+    categories.forEach((category) => {
+      setButtons(category);
     });
     
        
 }
 
-function setButtons(data) {
+function setButtons(category) {
   const div = document.createElement("div");
-  div.innerHTML = `${data.name}`;
+  div.innerHTML = `${category.name}`;
   document.querySelector(".filter-container").append(div);
+  div.addEventListener("click", () => filterGallery(category.id));
 }
 
 createGallery();
@@ -22,16 +23,26 @@ async function createGallery() {
 const works = await getWorks();
 console.log(works);
 const gallery = document.querySelector(".gallery");
-works.forEach((works) => {
-  setImages(works, gallery);
+works.forEach((work) => {
+  setImages(work, gallery);
 });
 }
 
-function setImages(data) {
+function setImages(work) {
 const figure = document.createElement("figure");
-figure.innerHTML = `<img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption>`;
+figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"><figcaption>${work.title}</figcaption>`;
 
 document.querySelector(".gallery").append(figure);
   
+}
+
+async  function filterGallery(categoryId) {
+  const works = await getWorks();
+  const gallery = document.querySelector(".gallery");
+  gallery.innerHTML="";
+  const filteredWorks = works.filter (work => work.categoryId===categoryId);
+  filteredWorks.forEach((work) => {
+    setImages(work);
+  });
 }
 
