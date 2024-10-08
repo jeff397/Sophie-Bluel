@@ -47,3 +47,10 @@ async  function filterGallery(categoryId) {
 }
 
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
+
+createLogin();
+
+async function createLogin() {
+    const login = await getLogin();
+    console.log(login);
+}
