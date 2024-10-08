@@ -1,13 +1,13 @@
 createButtons();
 
-async function createButtons(){
-    const categories = await getCategories();
-    console.log(categories);
-    categories.forEach((category) => {
-      setButtons(category);
-    });
-    
-       
+async function createButtons() {
+  const categories = await getCategories();
+  console.log(categories);
+  categories.forEach((category) => {
+    setButtons(category);
+  });
+
+
 }
 
 function setButtons(category) {
@@ -19,28 +19,29 @@ function setButtons(category) {
 
 createGallery();
 
-async function createGallery() { 
-const works = await getWorks();
-console.log(works);
-const gallery = document.querySelector(".gallery");
-works.forEach((work) => {
-  setImages(work, gallery);
-});
+async function createGallery() {
+  const works = await getWorks();
+  console.log(works);
+  const gallery = document.querySelector(".gallery");
+  gallery.innerHTML = "";
+  works.forEach((work) => {
+    setImages(work, gallery);
+  });
 }
 
 function setImages(work) {
-const figure = document.createElement("figure");
-figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"><figcaption>${work.title}</figcaption>`;
+  const figure = document.createElement("figure");
+  figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"><figcaption>${work.title}</figcaption>`;
 
-document.querySelector(".gallery").append(figure);
-  
+  document.querySelector(".gallery").append(figure);
+
 }
 
-async  function filterGallery(categoryId) {
+async function filterGallery(categoryId) {
   const works = await getWorks();
   const gallery = document.querySelector(".gallery");
-  gallery.innerHTML="";
-  const filteredWorks = works.filter (work => work.categoryId===categoryId);
+  gallery.innerHTML = "";
+  const filteredWorks = works.filter(work => work.categoryId === categoryId);
   filteredWorks.forEach((work) => {
     setImages(work);
   });
@@ -48,9 +49,4 @@ async  function filterGallery(categoryId) {
 
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
 
-createLogin();
 
-async function createLogin() {
-    const login = await getLogin();
-    console.log(login);
-}

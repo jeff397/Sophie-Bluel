@@ -14,9 +14,15 @@ async function getWorks(){
     return works;
 }
 
-async function getLogin(){
-    const url='http://localhost:5678/api/users/login';
-    const res= await fetch(url);
+async function postLogin(credentials){
+    const url='http://localhost:5678/api/users/login';   
+    const res= await fetch(url, {
+        method:"POST",
+        body:JSON.stringify(credentials),
+        headers:{
+            "Content-Type":"application/json"
+        }
+    });
     const login= await res.json();     
     
     return login;
