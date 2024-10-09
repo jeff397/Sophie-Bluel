@@ -1,15 +1,18 @@
-async function submitId() {
-   
+document.querySelector('.user-login').addEventListener('submit', submitId);
+
+async function submitId(event) { 
+    event.preventDefault();  
     let credentials = {
-        email: "sophie.bluel@test.tld",
-        password :"S0phie",
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
     };
     let result = await postLogin(credentials);
     console.log(result);
-    alert(result.message);
+    console.log("E-mail:", credentials.email);
+    console.log("Mot de passe:", credentials.password);
+    
 
     
 }
 
 
-submitId();
