@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="./src/api.js" defer></script>
+    <script src="./src/login.js" defer></script>
 	
 </head>
 <body>
@@ -27,9 +28,9 @@
     <main>
         <section id="contact">
             <h2 class="login">log in</h2>
-                <form action="#" method="post">                    
+                <form class="user-login" method="post">                    
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" autocomplete="on">
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password">
                     <input type="submit" value="Se connecter">

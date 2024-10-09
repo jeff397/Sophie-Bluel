@@ -50,3 +50,4 @@ async function filterGallery(categoryId) {
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
 
 
+

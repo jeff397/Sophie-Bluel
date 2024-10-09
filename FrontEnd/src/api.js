@@ -23,8 +23,8 @@ async function postLogin(credentials){
             "Content-Type":"application/json"
         }
     });
-    const login= await res.json();     
-    
-    return login;
+    return await res.json();
+//     console.log("Statut de la réponse:", res.status); // Ajoute ce log pour voir le statut HTTP exact
+// console.log("Réponse complète:", await res.text()); // Affiche la réponse texte brute
 }
 
