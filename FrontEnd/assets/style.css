@@ -243,3 +243,14 @@ footer nav ul {
 	text-decoration: underline;
 	
 }
+
+.error-box {
+	display: flex;
+	justify-content: center;	
+	background-color: #93532F;
+	box-shadow: 0px 4px 10px rgba(147, 83, 47, 0.7);
+	color: white;
+	padding: 20px;
+	font-size: 1.2em;
+
+}
