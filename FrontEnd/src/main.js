@@ -32,7 +32,6 @@ async function createGallery() {
 function setImages(work) {
   const figure = document.createElement("figure");
   figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"><figcaption>${work.title}</figcaption>`;
-
   document.querySelector(".gallery").append(figure);
 
 }
@@ -49,21 +48,47 @@ async function filterGallery(categoryId) {
 
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
 
- // Fonction pour vérifier si l'utilisateur est connecté
- function isUserLoggedIn() {
-  // Vérifie si le token de session est présent
+
+// gestion de la bannière en mode Admin
+
+function isUserLoggedIn() {
+
   return sessionStorage.getItem("token") !== null;
 }
 
-// Fonction pour afficher la bannière après la connexion
+
 function displayLoginBanner() {
   const banner = document.getElementById("loginBanner");
   if (isUserLoggedIn()) {
-      banner.style.display = "block"; // Afficher la bannière
+    banner.style.display = "block";
   }
 }
 
-// Exécute la fonction après le chargement de la page
-window.onload = function() {
+
+window.onload = function () {
   displayLoginBanner();
 };
+
+//gestion des boutons login/logout
+
+document.addEventListener("DOMContentLoaded", function () {
+  const authorise = document.getElementById("authorise");
+  const token = sessionStorage.getItem("token");
+  console.log("Token récupéré", token);
+  if (token) {
+    authorise.textContent = "Logout";
+    authorise.href = "#";
+    console.log("utilisateur connecté, affichage Logout");
+    authorise.addEventListener("click", function (event) {
+      event.preventDefault();
+      sessionStorage.removeItem("token");
+      console.log("déconnexion, suppression du token");
+      window.location.href = "login.html";
+    });
+  }
+  else {
+    authorise.textContent = "login";
+    authorise.href = "login.html";
+    console.log("utilisateur non connecté, affichage login");
+  }
+});
