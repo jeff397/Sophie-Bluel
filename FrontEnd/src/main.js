@@ -49,5 +49,21 @@ async function filterGallery(categoryId) {
 
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
 
+ // Fonction pour vérifier si l'utilisateur est connecté
+ function isUserLoggedIn() {
+  // Vérifie si le token de session est présent
+  return sessionStorage.getItem("token") !== null;
+}
 
+// Fonction pour afficher la bannière après la connexion
+function displayLoginBanner() {
+  const banner = document.getElementById("loginBanner");
+  if (isUserLoggedIn()) {
+      banner.style.display = "block"; // Afficher la bannière
+  }
+}
 
+// Exécute la fonction après le chargement de la page
+window.onload = function() {
+  displayLoginBanner();
+};
