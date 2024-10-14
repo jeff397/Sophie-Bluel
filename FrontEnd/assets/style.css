@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	box-sizing: border-box;
 	
 }
 /* HTML5 display-role reset for older browsers */
@@ -78,7 +79,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -263,13 +264,18 @@ footer nav ul {
 }
 
 
-.edit-btn {
+.edit-btn {	
 	display: flex;
 	align-items: center;
 	margin-left: 20px;  
 }
 
-.project p {
+.edit-btn a {
+	color: black;
+}
+
+.modify {
+	display: none;
 	margin: 0 0 25px;   
 }
 
@@ -285,7 +291,7 @@ footer nav ul {
 }
 
 .banner {
-	display: none; /* Masquer par défaut */
+	display: none; 
 	background: rgba(0, 0, 0, 1);	
 	color: white;
 	text-align: center;
@@ -302,3 +308,44 @@ footer nav ul {
 	font-size: 16px;
 	margin-left: 10px;
 }
+
+/* boite modal */
+
+.modal {
+	position: fixed;
+	display: flex  ; 
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index:1000;
+
+}
+
+.modal-wrapper {
+	position: relative;
+	overflow: auto;
+	width: 600px;
+	max-width: calc(100vw -40px);
+	max-height: calc(100vh -40px);
+	padding: 20px;
+	background-color: white;
+}
+
+.close-modal {
+	position:absolute;
+	background: none;
+	border: none;
+	font-size: 2rem;	
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+  }
+  
+  .close-modal:focus {
+	outline: none;
+  }
+  
