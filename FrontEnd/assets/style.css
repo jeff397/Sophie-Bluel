@@ -348,4 +348,37 @@ footer nav ul {
   .close-modal:focus {
 	outline: none;
   }
+
+  #title-modal {
+	font-family: "work sans";
+	font-weight: 400;
+	font-size: 26px;
+	text-align: center;
+	padding: 60px 45px;
+  }
+
+  .modal-gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+  }
+
+  .modal-gallery img {
+	width: 100%;
+  }
+
+  .add-photo-btn {
+	display: flex;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 237px;
+	text-align: center;
+	border-radius: 60px ;
+	padding: 10px;
+  }
   

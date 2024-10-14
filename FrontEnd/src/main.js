@@ -26,6 +26,7 @@ async function createGallery() {
   gallery.innerHTML = "";
   works.forEach((work) => {
     setImages(work, gallery);
+    setModalImages(work);
   });
 }
 
@@ -36,6 +37,19 @@ function setImages(work) {
 
 }
 
+// galerie de la modal
+
+function setModalImages(work) {
+  const figure = document.createElement("figure");
+  figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}">`;
+  document.querySelector(".modal-gallery").append(figure);
+
+}
+
+
+// filtrage de la galerie principale
+
+
 async function filterGallery(categoryId) {
   const works = await getWorks();
   const gallery = document.querySelector(".gallery");
@@ -45,6 +59,7 @@ async function filterGallery(categoryId) {
     setImages(work);
   });
 }
+
 
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
 
@@ -123,4 +138,5 @@ const closeModal = function (e) {
 document.querySelectorAll(".close-modal").forEach(button => {
   button.addEventListener("click", closeModal);
 });
+
 
