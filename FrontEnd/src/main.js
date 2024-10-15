@@ -160,7 +160,50 @@ async function callDeleteWork(work) {
 }
 
 const addPhotoButton = document.querySelector(".add-photo-btn");
+
 addPhotoButton.addEventListener("click", () => {
-  console.log("clique photo");
-  
+  console.log("Clique photo");
+
+  const modalWrapper = document.querySelector(".modal-wrapper");
+
+  // Supprime le contenu précédent
+  while (modalWrapper.firstChild) {
+    modalWrapper.removeChild(modalWrapper.firstChild);
+  }
+
+  // Crée les nouveaux éléments pour la nouvelle fenêtre
+  const newTitle = document.createElement("h1");
+  newTitle.textContent = "Nouvelle fenêtre";
+
+  const newParagraph = document.createElement("p");
+  newParagraph.textContent = "Ceci est la nouvelle fenêtre après avoir cliqué sur le bouton.";
+
+  const closeModalButton = document.createElement("button");
+  closeModalButton.textContent = "Fermer";
+  closeModalButton.classList.add("close-modal-btn");
+
+  // Ajoute le bouton de fermeture à la modale
+  modalWrapper.appendChild(newTitle);
+  modalWrapper.appendChild(newParagraph);
+  modalWrapper.appendChild(closeModalButton);
+
+  // Gérer la fermeture de la nouvelle fenêtre
+  closeModalButton.addEventListener("click", () => {
+    modalWrapper.innerHTML = ''; // Nettoyer la modale
+    const originalTitle = document.createElement("h1");
+    originalTitle.textContent = "Fenêtre actuelle";
+
+    const originalButton = document.createElement("button");
+    originalButton.textContent = "Ajouter une photo";
+    originalButton.classList.add("add-photo-btn");
+
+    modalWrapper.appendChild(originalTitle);
+    modalWrapper.appendChild(originalButton);
+
+    // Remettre l'événement sur le bouton "Ajouter une photo"
+    originalButton.addEventListener("click", () => {
+      console.log("Clique photo");
+      // Réexécuter la logique pour afficher la nouvelle fenêtre
+    });
+  });
 });
