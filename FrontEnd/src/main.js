@@ -41,10 +41,11 @@ function setImages(work) {
 
 function setModalImages(work) {
   const figure = document.createElement("figure");
-  figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}">`;
+  figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}">`;  
   document.querySelector(".modal-gallery").append(figure);
 
 }
+
 
 
 // filtrage de la galerie principale
@@ -110,19 +111,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// gestion de la modale
+
 const openModal = function (e) {
-  e.preventDefault(); 
+  e.preventDefault();
   const targetElement = e.target.closest('a');
   if (targetElement) {
-    const target = document.querySelector(targetElement.getAttribute("href"));  
+    const target = document.querySelector(targetElement.getAttribute("href"));
     if (target) {
-      target.style.display = "flex";   
-      target.removeAttribute("aria-hidden");      
+      target.style.display = "flex";
+      target.removeAttribute("aria-hidden");
     }
   }
 };
 
- 
+
 document.querySelectorAll(".js-modal").forEach(a => {
   a.addEventListener("click", openModal);
 });
