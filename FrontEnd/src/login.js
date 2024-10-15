@@ -8,27 +8,20 @@ async function submitId(event) {
         password: document.getElementById('password').value,
     }
 
-    try {
 
-        let result = await postLogin(credentials);
-        if (result.status === 200) {            
-            const data = await result.json();
-            sessionStorage.setItem("token", data.token);
-            window.location.href = "index.html";                    
-        }
+
+    let result = await postLogin(credentials);
+    if (result) {
+        sessionStorage.setItem("token", result.token);
+        window.location.href = "index.html";
     }
-
-    catch {
-
+    else {
         errorMessage();
-
     }
-
 }
 
 
 function errorMessage() {
-    
     const existingErrorBox = document.querySelector(".error-box");
     if (existingErrorBox) {
         existingErrorBox.remove();
@@ -37,11 +30,9 @@ function errorMessage() {
     messageErrorBox.className = "error-box";
     messageErrorBox.innerHTML = "E-mail ou mot de passe invalide";
     messageErrorBox.addEventListener("click", () => {
-    messageErrorBox.remove();
+        messageErrorBox.remove();
     });
     document.querySelector(".user-login").prepend(messageErrorBox);
-
-
 }
 
 

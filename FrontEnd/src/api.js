@@ -25,10 +25,22 @@ async function postLogin(credentials){
     });
     
     if (res.ok) {
-        return res;  
+        const data = await res.json(); 
+        return data;
     } else {
        
-        throw new Error('Login échoué');
+        return null;
     }
 }
 
+async function deleteWork(work, token) {
+    const url=`http://localhost:5678/api/works/${work.id}`;
+    const res= await fetch(url, {
+        method:"DELETE", 
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return res.ok;
+}

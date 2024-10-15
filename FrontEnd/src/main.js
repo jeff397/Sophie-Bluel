@@ -41,15 +41,20 @@ function setImages(work) {
 
 function setModalImages(work) {
   const figure = document.createElement("figure");
-  figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}">`;  
+  const img = document.createElement("img");
+  const trashcan = document.createElement("i");
+  img.src = work.imageUrl;
+  img.alt = work.title;
+  trashcan.classList.add("fa-solid", "fa-trash-can");
+  trashcan.addEventListener("click", () => {
+    callDeleteWork(work);
+  })
+  figure.appendChild(img);
+  figure.appendChild(trashcan);
   document.querySelector(".modal-gallery").append(figure);
-
 }
 
-
-
 // filtrage de la galerie principale
-
 
 async function filterGallery(categoryId) {
   const works = await getWorks();
@@ -131,10 +136,10 @@ document.querySelectorAll(".js-modal").forEach(a => {
 });
 
 const closeModal = function (e) {
-  const modal = e.target.closest('.modal');  // Trouver la modale parente
+  const modal = e.target.closest('.modal');   
   if (modal) {
-    modal.style.display = "none";  // Masquer la modale
-    modal.setAttribute("aria-hidden", "true");  // Accessibilité : masquer la modale
+    modal.style.display = "none";   
+    modal.setAttribute("aria-hidden", "true");   
   }
 };
 
@@ -143,3 +148,13 @@ document.querySelectorAll(".close-modal").forEach(button => {
 });
 
 
+async function callDeleteWork(work) {
+  const token = sessionStorage.getItem("token");
+  const success = await deleteWork(work, token);
+  if (success) {
+    alert("ça a marché")
+  }
+  else {
+    alert("ça n'a pas marché")
+  }
+}
