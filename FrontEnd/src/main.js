@@ -158,3 +158,9 @@ async function callDeleteWork(work) {
     alert("ça n'a pas marché")
   }
 }
+
+const addPhotoButton = document.querySelector(".add-photo-btn");
+addPhotoButton.addEventListener("click", () => {
+  console.log("clique photo");
+  
+});
