@@ -8,14 +8,14 @@ async function createButtons() {
   });
 
 
-}
+};
 
 function setButtons(category) {
   const div = document.createElement("div");
   div.innerHTML = `${category.name}`;
   document.querySelector(".filter-container").append(div);
   div.addEventListener("click", () => filterGallery(category.id));
-}
+};
 
 createGallery();
 
@@ -48,11 +48,11 @@ function setModalImages(work) {
   trashcan.classList.add("fa-solid", "fa-trash-can");
   trashcan.addEventListener("click", () => {
     callDeleteWork(work);
-  })
+  });
   figure.appendChild(img);
   figure.appendChild(trashcan);
   document.querySelector(".modal-gallery").append(figure);
-}
+};
 
 // filtrage de la galerie principale
 
@@ -64,7 +64,7 @@ async function filterGallery(categoryId) {
   filteredWorks.forEach((work) => {
     setImages(work);
   });
-}
+};
 
 
 document.querySelector(".fullGallery").addEventListener("click", () => createGallery());
@@ -75,7 +75,7 @@ document.querySelector(".fullGallery").addEventListener("click", () => createGal
 function isUserLoggedIn() {
 
   return sessionStorage.getItem("token") !== null;
-}
+};
 
 
 function displayLoginBanner() {
@@ -84,8 +84,8 @@ function displayLoginBanner() {
   if (isUserLoggedIn()) {
     banner.style.display = "block";
     modify.style.display = "block";
-  }
-}
+  };
+};
 
 
 window.onload = function () {
@@ -126,8 +126,8 @@ const openModal = function (e) {
     if (target) {
       target.style.display = "flex";
       target.removeAttribute("aria-hidden");
-    }
-  }
+    };
+  };
 };
 
 
@@ -136,11 +136,11 @@ document.querySelectorAll(".js-modal").forEach(a => {
 });
 
 const closeModal = function (e) {
-  const modal = e.target.closest('.modal');   
+  const modal = e.target.closest('.modal');
   if (modal) {
-    modal.style.display = "none";   
-    modal.setAttribute("aria-hidden", "true");   
-  }
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  };
 };
 
 document.querySelectorAll(".close-modal").forEach(button => {
@@ -152,58 +152,29 @@ async function callDeleteWork(work) {
   const token = sessionStorage.getItem("token");
   const success = await deleteWork(work, token);
   if (success) {
-    alert("ça a marché")
+    alert("ça a marché");
   }
   else {
-    alert("ça n'a pas marché")
+    alert("ça n'a pas marché");
   }
-}
+};
 
 const addPhotoButton = document.querySelector(".add-photo-btn");
+const modal1 = document.getElementById("modal1");
+const modal2 = document.getElementById("modal2");
 
-addPhotoButton.addEventListener("click", () => {
-  console.log("Clique photo");
-
-  const modalWrapper = document.querySelector(".modal-wrapper");
-
-  // Supprime le contenu précédent
-  while (modalWrapper.firstChild) {
-    modalWrapper.removeChild(modalWrapper.firstChild);
-  }
-
-  // Crée les nouveaux éléments pour la nouvelle fenêtre
-  const newTitle = document.createElement("h1");
-  newTitle.textContent = "Nouvelle fenêtre";
-
-  const newParagraph = document.createElement("p");
-  newParagraph.textContent = "Ceci est la nouvelle fenêtre après avoir cliqué sur le bouton.";
-
-  const closeModalButton = document.createElement("button");
-  closeModalButton.textContent = "Fermer";
-  closeModalButton.classList.add("close-modal-btn");
-
-  // Ajoute le bouton de fermeture à la modale
-  modalWrapper.appendChild(newTitle);
-  modalWrapper.appendChild(newParagraph);
-  modalWrapper.appendChild(closeModalButton);
-
-  // Gérer la fermeture de la nouvelle fenêtre
-  closeModalButton.addEventListener("click", () => {
-    modalWrapper.innerHTML = ''; // Nettoyer la modale
-    const originalTitle = document.createElement("h1");
-    originalTitle.textContent = "Fenêtre actuelle";
-
-    const originalButton = document.createElement("button");
-    originalButton.textContent = "Ajouter une photo";
-    originalButton.classList.add("add-photo-btn");
-
-    modalWrapper.appendChild(originalTitle);
-    modalWrapper.appendChild(originalButton);
-
-    // Remettre l'événement sur le bouton "Ajouter une photo"
-    originalButton.addEventListener("click", () => {
-      console.log("Clique photo");
-      // Réexécuter la logique pour afficher la nouvelle fenêtre
-    });
-  });
+addPhotoButton.addEventListener("click", function () {
+  modal1.style.display = "none";
+  modal2.style.display = "flex";
 });
+
+const arrowLeft = document.querySelector(".arrow-left");
+arrowLeft.addEventListener("click", function () {
+  console.log("flèche gauche");
+  modal2.style.display = "none";
+  modal1.style.display = "flex";
+});
+
+
+
+
