@@ -175,6 +175,30 @@ arrowLeft.addEventListener("click", function () {
   modal1.style.display = "flex";
 });
 
+// document.querySelector('.file-upload').addEventListener('click', function () {
+//   document.getElementById('photo-upload').click(); // Ouvre le dialogue de sélection de fichier
+// });
+
+document.getElementById('photo-upload').addEventListener('change', function (event) {
+  const fileUpload = document.querySelector(".file-upload");
+  const photoLimits = document.querySelector(".photo-limits");
+  const file = event.target.files[0]; // Récupère le fichier sélectionné
+  if (file) {
+    const reader = new FileReader(); // Utilise FileReader pour lire le fichier
+
+    reader.onload = function (e) {
+      const previewImage = document.getElementById('preview-image');
+      previewImage.src = e.target.result; // Définit l'URL de l'image
+      fileUpload.style.display = "none";
+      photoLimits.style.display = "none";
+      previewImage.style.display = 'flex'; // Affiche l'image
+    };
+
+    reader.readAsDataURL(file); // Lis le fichier comme URL de données
+  }
+});
+
+
 
 
 
