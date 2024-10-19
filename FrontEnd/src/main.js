@@ -230,6 +230,7 @@ const validateButton = document.querySelector(".validate");
 const formPhotoTitle = document.getElementById("photo-title");
 validateButton.addEventListener("click", function () {
   console.log("validé");
+
 })
 
 
