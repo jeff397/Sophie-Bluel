@@ -165,38 +165,72 @@ const modal2 = document.getElementById("modal2");
 
 addPhotoButton.addEventListener("click", function () {
   modal1.style.display = "none";
+  modal2.removeAttribute('aria-hidden');
   modal2.style.display = "flex";
+
 });
 
 const arrowLeft = document.querySelector(".arrow-left");
 arrowLeft.addEventListener("click", function () {
   console.log("flèche gauche");
+  modal2.setAttribute('aria-hidden', 'true');
   modal2.style.display = "none";
   modal1.style.display = "flex";
 });
 
-// document.querySelector('.file-upload').addEventListener('click', function () {
-//   document.getElementById('photo-upload').click(); // Ouvre le dialogue de sélection de fichier
-// });
+
 
 document.getElementById('photo-upload').addEventListener('change', function (event) {
   const fileUpload = document.querySelector(".file-upload");
   const photoLimits = document.querySelector(".photo-limits");
-  const file = event.target.files[0]; // Récupère le fichier sélectionné
+  const file = event.target.files[0];
   if (file) {
-    const reader = new FileReader(); // Utilise FileReader pour lire le fichier
+    const fileType = file.type;
+    if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+      alert("Veuillez sélectionner une image au format JPEG ou PNG.");
+      return;
+    }
+
+    const reader = new FileReader();
 
     reader.onload = function (e) {
       const previewImage = document.getElementById('preview-image');
-      previewImage.src = e.target.result; // Définit l'URL de l'image
+      previewImage.src = e.target.result;
       fileUpload.style.display = "none";
       photoLimits.style.display = "none";
-      previewImage.style.display = 'flex'; // Affiche l'image
+      previewImage.style.display = 'flex';
     };
 
-    reader.readAsDataURL(file); // Lis le fichier comme URL de données
+    reader.readAsDataURL(file);
   }
 });
+
+async function createFormCategories() {
+  const categories = await getCategories();
+  console.log(categories);
+  if (categories) {
+    selectCategories(categories);
+  }
+}
+
+
+async function selectCategories(categories) {
+  const categorySelect = document.getElementById("category");
+  categories.forEach(category => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.name;
+    categorySelect.appendChild(option);
+  })
+}
+
+document.addEventListener("DOMContentLoaded", createFormCategories);
+
+const validateButton = document.querySelector(".validate");
+const formPhotoTitle = document.getElementById("photo-title");
+validateButton.addEventListener("click", function () {
+  console.log("validé");
+})
 
 
 

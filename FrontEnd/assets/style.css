@@ -490,9 +490,12 @@ hr {
   flex-direction: column;
 }
 
-#add-form input {
+#add-form input,
+#category {
   height: 50px;
-  font-size: 1.2em;
+  font-size: 1em;
+  font-family: "work sans";
+  font-weight: 400;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   cursor: pointer;
@@ -500,6 +503,9 @@ hr {
 
 #add-form label {
   margin: 2em 0 1em 0;
+  font-family: "work sans";
+  font-weight: 500;
+  font-size: 1em;
 }
 
 .validate {
