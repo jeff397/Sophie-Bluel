@@ -124,11 +124,13 @@ const openModal = function (e) {
   if (targetElement) {
     const target = document.querySelector(targetElement.getAttribute("href"));
     if (target) {
+
       target.style.display = "flex";
       target.removeAttribute("aria-hidden");
     };
   };
 };
+
 
 
 document.querySelectorAll(".js-modal").forEach(a => {
@@ -138,6 +140,7 @@ document.querySelectorAll(".js-modal").forEach(a => {
 const closeModal = function (e) {
   const modal = e.target.closest('.modal');
   if (modal) {
+    resetModal2();
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
   };
@@ -173,6 +176,7 @@ addPhotoButton.addEventListener("click", function () {
 const arrowLeft = document.querySelector(".arrow-left");
 arrowLeft.addEventListener("click", function () {
   console.log("flèche gauche");
+  resetModal2();
   modal2.setAttribute('aria-hidden', 'true');
   modal2.style.display = "none";
   modal1.style.display = "flex";
@@ -230,10 +234,21 @@ const validateButton = document.querySelector(".validate");
 const formPhotoTitle = document.getElementById("photo-title");
 validateButton.addEventListener("click", function () {
   console.log("validé");
-
+  resetModal2();
 })
 
+function resetModal2() {
+  const preview = document.getElementById('preview-image');
+  const fileUpload = document.querySelector(".file-upload");
+  const photoLimits = document.querySelector(".photo-limits");
+  const defaultText = document.getElementById('image-area');
+  preview.src = '';
+  preview.style.display = 'none';
+  fileUpload.style.display = '';
+  photoLimits.style.display = '';
+  defaultText.style.display = '';
 
+}
 
 
 

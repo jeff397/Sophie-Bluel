@@ -86,12 +86,13 @@
 							<div id="preview-container">
 								<img id="preview-image" alt="Preview Image" style="display: none;" />
 							</div>
-							<span class="photo-limits">jpg, png : 4mo max</span>
+							<p class="photo-limits">jpg, png : 4mo max</p>
 						</form>
 						<div id="add-form">
 							<form class="user-add-form" action="#" method="post">
-								<label for="title">Titre</label>
-								<input type="text" name="title" id="photo-title" autocomplete="on" required>
+								<label for="photo-title">Titre</label>
+								<input type="text" name="photo-title" id="photo-title" autocomplete="on" required>
+								<p id="title-error-message" class="error-message">Veuillez entrer un titre</p>
 								<label for="category">Catégorie</label>
 								<select name="category" id="category" size="1">
 									<option value="">Veuillez choisir une catégorie</option>
@@ -99,7 +100,8 @@
 							</form>
 						</div>
 						<hr>
-						<input type="submit" class="validate" value="Valider">
+						<input type="submit" class="validate" value="Valider" id="validate-btn">
+						<p id="photo-error-message" class="error-message">veuillez sélectionner une photo</p>
 
 					</div>
 				</aside>
