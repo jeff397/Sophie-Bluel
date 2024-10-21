@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (valid) {
       console.log("Formulaire validé");
 
-
+      postWork(file, photoTitle, category);
       resetModal2();
 
     } else {
