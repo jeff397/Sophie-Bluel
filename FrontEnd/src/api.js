@@ -64,7 +64,11 @@ async function postWork(file, photoTitle, category) {
     });
     if (res.ok) {
         const data = await res.json();
+        addImageToGallery(data);
         return data;
 
+    } else {
+
+        alert("Échec de l'upload. Veuillez réessayer.");
     }
 }

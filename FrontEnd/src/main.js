@@ -2,20 +2,34 @@ createButtons();
 
 async function createButtons() {
   const categories = await getCategories();
-  console.log(categories);
+  const fullGallery = document.querySelector(".fullGallery");
+  fullGallery.classList.add("category-button", "active");
+  document.querySelector(".filter-container").append(fullGallery);
+  fullGallery.addEventListener("click", () => {
+    document.querySelectorAll('.filter-container > div').forEach(button => {
+      button.classList.remove('active');
+    });
+    fullGallery.classList.add('active');
+    createGallery();
+  });
   categories.forEach((category) => {
     setButtons(category);
   });
-
-
-};
+}
 
 function setButtons(category) {
   const div = document.createElement("div");
   div.innerHTML = `${category.name}`;
+  div.classList.add("category-button");
   document.querySelector(".filter-container").append(div);
-  div.addEventListener("click", () => filterGallery(category.id));
-};
+  div.addEventListener("click", () => {
+    document.querySelectorAll('.filter-container > div').forEach(button => {
+      button.classList.remove('active');
+    });
+    div.classList.add('active');
+    filterGallery(category.id);
+  });
+}
 
 createGallery();
 
@@ -37,9 +51,18 @@ function setImages(work) {
 
 }
 
+function addImageToGallery(work) {
+  const gallery = document.querySelector(".gallery");
+  const figure = document.createElement("figure");
+  figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}">
+                      <figcaption>${work.title}</figcaption>`;
+  gallery.appendChild(figure);
+}
+
 // galerie de la modal
 
 function setModalImages(work) {
+
   const figure = document.createElement("figure");
   const img = document.createElement("img");
   const trashcan = document.createElement("i");
@@ -51,7 +74,7 @@ function setModalImages(work) {
   });
   figure.appendChild(img);
   figure.appendChild(trashcan);
-  document.querySelector(".modal-gallery").append(figure);
+  document.querySelector(".modal-gallery").appendChild(figure);
 };
 
 // filtrage de la galerie principale
@@ -73,7 +96,6 @@ document.querySelector(".fullGallery").addEventListener("click", () => createGal
 // gestion de la bannière en mode Admin
 
 function isUserLoggedIn() {
-
   return sessionStorage.getItem("token") !== null;
 };
 
@@ -131,8 +153,6 @@ const openModal = function (e) {
   };
 };
 
-
-
 document.querySelectorAll(".js-modal").forEach(a => {
   a.addEventListener("click", openModal);
 });
@@ -155,7 +175,10 @@ async function callDeleteWork(work) {
   const token = sessionStorage.getItem("token");
   const success = await deleteWork(work, token);
   if (success) {
-    alert("ça a marché");
+    await createGallery();
+    document.querySelector(".modal-gallery").innerHTML = "";
+    const works = await getWorks();
+    works.forEach(setModalImages);
   }
   else {
     alert("ça n'a pas marché");
@@ -330,6 +353,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+const photoUploadInput = document.getElementById("photo-upload");
+const photoTitleInput = document.getElementById("photo-title");
+const categoryInput = document.getElementById("category");
+const validateButton = document.querySelector(".validate");
+validateButton.disabled = true;
+validateButton.style.backgroundColor = "grey";
+
+function checkForm() {
+  const file = photoUploadInput.files[0];
+  const title = photoTitleInput.value;
+  const category = categoryInput.value;
+  if (file && title && category) {
+    validateButton.disabled = false;
+    validateButton.style.backgroundColor = "#1d6154";
+  } else {
+    validateButton.disabled = true;
+    validateButton.style.backgroundColor = "grey";
+  }
+}
+
+photoUploadInput.addEventListener("change", checkForm);
+photoTitleInput.addEventListener("input", checkForm);
+categoryInput.addEventListener("change", checkForm);
+
 
 
 
