@@ -230,12 +230,7 @@ async function selectCategories(categories) {
 
 document.addEventListener("DOMContentLoaded", createFormCategories);
 
-const validateButton = document.querySelector(".validate");
-const formPhotoTitle = document.getElementById("photo-title");
-validateButton.addEventListener("click", function () {
-  console.log("validé");
-  resetModal2();
-})
+
 
 function resetModal2() {
   const preview = document.getElementById('preview-image');
@@ -247,8 +242,104 @@ function resetModal2() {
   fileUpload.style.display = '';
   photoLimits.style.display = '';
   defaultText.style.display = '';
-
+  document.getElementById('photo-title').value = '';
+  document.getElementById('category').value = '';
+  const errorMessage = document.getElementById('error-message');
+  const titleErrorMessage = document.getElementById('title-error-message');
+  const categoryErrorMessage = document.getElementById('category-error-message');
+  errorMessage.textContent = '';
+  errorMessage.style.display = 'none';
+  titleErrorMessage.textContent = '';
+  titleErrorMessage.style.display = 'none';
+  categoryErrorMessage.textContent = '';
+  categoryErrorMessage.style.display = 'none';
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const validateButton = document.querySelector(".validate");
+  const photoUploadInput = document.getElementById("photo-upload");
+  const photoTitleInput = document.getElementById("photo-title");
+  const categoryInput = document.getElementById("category");
+  const errorMessage = document.getElementById("error-message");
+  const titleErrorMessage = document.getElementById("title-error-message");
+  const categoryErrorMessage = document.getElementById("category-error-message");
+  photoUploadInput.addEventListener("change", function () {
+    errorMessage.style.display = "none";
+    const file = photoUploadInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const preview = document.getElementById('preview-image');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+
+  photoTitleInput.addEventListener("input", function () {
+    titleErrorMessage.style.display = "none";
+  });
+
+  categoryInput.addEventListener("change", function () {
+    categoryErrorMessage.style.display = "none";
+  });
+
+
+  validateButton.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const file = photoUploadInput.files[0];
+    const photoTitle = photoTitleInput.value;
+    const category = categoryInput.value;
+    errorMessage.style.display = "none";
+    titleErrorMessage.style.display = "none";
+    categoryErrorMessage.style.display = "none";
+    let valid = true;
+    if (!file) {
+      errorMessage.textContent = "Veuillez sélectionner une photo.";
+      errorMessage.style.display = "flex";
+      valid = false;
+    } else if (!["image/jpeg", "image/png"].includes(file.type)) {
+      errorMessage.textContent = "Format non valide. Veuillez télécharger une image au format jpg ou png.";
+      errorMessage.style.display = "flex";
+      valid = false;
+    } else if (file.size > 4 * 1024 * 1024) {
+      errorMessage.textContent = "Le fichier dépasse la taille maximale de 4 Mo.";
+      errorMessage.style.display = "flex";
+      valid = false;
+    }
+    if (!photoTitle) {
+      titleErrorMessage.textContent = "Veuillez entrer un titre pour la photo.";
+      titleErrorMessage.style.display = "flex";
+      valid = false;
+    }
+    if (!category) {
+      categoryErrorMessage.textContent = "Veuillez choisir une catégorie.";
+      categoryErrorMessage.style.display = "block";
+      valid = false;
+    }
+    if (valid) {
+      console.log("Formulaire validé");
+
+
+      resetModal2();
+
+    } else {
+      console.log("Formulaire non validé, réinitialisation annulée.");
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -494,6 +494,7 @@ hr {
 #category {
   height: 50px;
   font-size: 1em;
+  margin-bottom: 20px;
   font-family: "work sans";
   font-weight: 400;
   border: none;

@@ -86,22 +86,24 @@
 							<div id="preview-container">
 								<img id="preview-image" alt="Preview Image" style="display: none;" />
 							</div>
-							<p class="photo-limits">jpg, png : 4mo max</p>
+							<span class="photo-limits">jpg, png : 4mo max</span>
+							<div id="error-message" class="error-box" style="display: none;"></div>
 						</form>
 						<div id="add-form">
 							<form class="user-add-form" action="#" method="post">
-								<label for="photo-title">Titre</label>
+								<label for="photo-title" id="photo-title-label">Titre</label>
 								<input type="text" name="photo-title" id="photo-title" autocomplete="on" required>
-								<p id="title-error-message" class="error-message">Veuillez entrer un titre</p>
-								<label for="category">Catégorie</label>
+								<div id="title-error-message" class="error-box" style="display: none;"></div>
+
 								<select name="category" id="category" size="1">
 									<option value="">Veuillez choisir une catégorie</option>
 								</select>
+								<div id="category-error-message" class="error-box" style="display: none;">
+								</div>
 							</form>
 						</div>
 						<hr>
 						<input type="submit" class="validate" value="Valider" id="validate-btn">
-						<p id="photo-error-message" class="error-message">veuillez sélectionner une photo</p>
 
 					</div>
 				</aside>
