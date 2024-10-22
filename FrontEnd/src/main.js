@@ -37,6 +37,7 @@ async function createGallery() {
   const works = await getWorks();
   console.log(works);
   const gallery = document.querySelector(".gallery");
+  document.querySelector(".modal-gallery").innerHTML = "";
   gallery.innerHTML = "";
   works.forEach((work) => {
     setImages(work, gallery);
@@ -197,32 +198,30 @@ arrowLeft.addEventListener("click", function () {
   modal1.style.display = "flex";
 });
 
-document
-  .getElementById("photo-upload")
-  .addEventListener("change", function (event) {
-    const fileUpload = document.querySelector(".file-upload");
-    const photoLimits = document.querySelector(".photo-limits");
-    const file = event.target.files[0];
-    if (file) {
-      const fileType = file.type;
-      if (fileType !== "image/jpeg" && fileType !== "image/png") {
-        alert("Veuillez sélectionner une image au format JPEG ou PNG.");
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.onload = function (e) {
-        const previewImage = document.getElementById("preview-image");
-        previewImage.src = e.target.result;
-        fileUpload.style.display = "none";
-        photoLimits.style.display = "none";
-        previewImage.style.display = "flex";
-      };
-
-      reader.readAsDataURL(file);
+document.getElementById("photo-upload").addEventListener("change", function (event) {
+  const fileUpload = document.querySelector(".file-upload");
+  const photoLimits = document.querySelector(".photo-limits");
+  const file = event.target.files[0];
+  if (file) {
+    const fileType = file.type;
+    if (fileType !== "image/jpeg" && fileType !== "image/png") {
+      alert("Veuillez sélectionner une image au format JPEG ou PNG.");
+      return;
     }
-  });
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const previewImage = document.getElementById("preview-image");
+      previewImage.src = e.target.result;
+      fileUpload.style.display = "none";
+      photoLimits.style.display = "none";
+      previewImage.style.display = "flex";
+    };
+
+    reader.readAsDataURL(file);
+  }
+});
 
 async function createFormCategories() {
   const categories = await getCategories();
@@ -377,3 +376,4 @@ function checkForm() {
 photoUploadInput.addEventListener("change", checkForm);
 photoTitleInput.addEventListener("input", checkForm);
 categoryInput.addEventListener("change", checkForm);
+checkForm();
