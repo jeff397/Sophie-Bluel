@@ -233,7 +233,7 @@ li a:hover {
   .filter-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centrer les éléments */
+    justify-content: center;
     margin: 50px auto;
   }
 
@@ -248,9 +248,7 @@ li a:hover {
     padding: 9px;
     margin: 10px;
     cursor: pointer;
-    width: calc(
-      50% - 20px
-    ); /* Chaque bouton occupe 50% de la largeur moins l'espace entre les boutons */
+    width: calc(50% - 20px);
     box-sizing: border-box;
   }
 }
@@ -592,26 +590,14 @@ hr {
   padding-bottom: 19px;
 }
 
+/* Image preview stylisée */
 #preview-container {
   display: flex;
   justify-content: center;
 }
-
-/* Image preview stylisée */
 #preview-image {
   max-width: 100%;
   max-height: 200px;
   border: 2px solid #007bff;
   border-radius: 8px;
 }
-/* .fa-trash-can {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 170px;
-  left: 95px;
-  width: 17px;
-  height: 17px;
-  background: white;
-} */

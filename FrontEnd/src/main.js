@@ -1,3 +1,6 @@
+// ---------------------------------------------------------
+// SECTION 1: INITIALISATION DES BOUTONS DE CATEGORIE
+// ---------------------------------------------------------
 createButtons();
 
 async function createButtons() {
@@ -17,6 +20,9 @@ async function createButtons() {
   });
 }
 
+// ---------------------------------------------------------
+// SECTION 2: CREATION DES BOUTONS DE FILTRE
+// ---------------------------------------------------------
 function setButtons(category) {
   const div = document.createElement("div");
   div.innerHTML = `${category.name}`;
@@ -31,6 +37,9 @@ function setButtons(category) {
   });
 }
 
+// ---------------------------------------------------------
+// SECTION 3: CREATION DE LA GALERIE D'IMAGES
+// ---------------------------------------------------------
 createGallery();
 
 async function createGallery() {
@@ -45,12 +54,18 @@ async function createGallery() {
   });
 }
 
+// ---------------------------------------------------------
+// SECTION 4: AJOUT D'IMAGES À LA GALERIE
+// ---------------------------------------------------------
 function setImages(work) {
   const figure = document.createElement("figure");
   figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"><figcaption>${work.title}</figcaption>`;
   document.querySelector(".gallery").append(figure);
 }
 
+// ---------------------------------------------------------
+// SECTION 5: AJOUT D'IMAGES À LA GALERIE MODALE
+// ---------------------------------------------------------
 function addImageToGallery(work) {
   const gallery = document.querySelector(".gallery");
   const figure = document.createElement("figure");
@@ -59,8 +74,9 @@ function addImageToGallery(work) {
   gallery.appendChild(figure);
 }
 
-// galerie de la modal
-
+// ---------------------------------------------------------
+// SECTION 6: CREATION DES IMAGES DANS LA MODALE
+// ---------------------------------------------------------
 function setModalImages(work) {
   const figure = document.createElement("figure");
   const img = document.createElement("img");
@@ -76,8 +92,9 @@ function setModalImages(work) {
   document.querySelector(".modal-gallery").appendChild(figure);
 }
 
-// filtrage de la galerie principale
-
+// ---------------------------------------------------------
+// SECTION 7: FILTRAGE DE LA GALERIE PRINCIPALE
+// ---------------------------------------------------------
 async function filterGallery(categoryId) {
   const works = await getWorks();
   const gallery = document.querySelector(".gallery");
@@ -88,12 +105,9 @@ async function filterGallery(categoryId) {
   });
 }
 
-document
-  .querySelector(".fullGallery")
-  .addEventListener("click", () => createGallery());
-
-// gestion de la bannière en mode Admin
-
+// ---------------------------------------------------------
+// SECTION 8: GESTION DE LA BANNIERE EN MODE ADMIN
+// ---------------------------------------------------------
 function isUserLoggedIn() {
   return sessionStorage.getItem("token") !== null;
 }
@@ -107,11 +121,12 @@ function displayLoginBanner() {
   }
 }
 
+// ---------------------------------------------------------
+// SECTION 9: GESTION DU LOGIN/LOGOUT
+// ---------------------------------------------------------
 window.onload = function () {
   displayLoginBanner();
 };
-
-//gestion des boutons login/logout
 
 document.addEventListener("DOMContentLoaded", function () {
   const authorise = document.getElementById("authorise");
@@ -134,8 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// gestion de la modale
-
+// ---------------------------------------------------------
+// SECTION 10: GESTION DE LA MODALE
+// ---------------------------------------------------------
 const openModal = function (e) {
   e.preventDefault();
   const targetElement = e.target.closest("a");
@@ -165,6 +181,9 @@ document.querySelectorAll(".close-modal").forEach((button) => {
   button.addEventListener("click", closeModal);
 });
 
+// ---------------------------------------------------------
+// SECTION 11: SUPPRESSION D'UNE ŒUVRE
+// ---------------------------------------------------------
 async function callDeleteWork(work) {
   const token = sessionStorage.getItem("token");
   const success = await deleteWork(work, token);
@@ -179,6 +198,9 @@ async function callDeleteWork(work) {
   }
 }
 
+// ---------------------------------------------------------
+// SECTION 12: GESTION DES MODALES D'UPLOAD D'IMAGES
+// ---------------------------------------------------------
 const addPhotoButton = document.querySelector(".add-photo-btn");
 const modal1 = document.getElementById("modal1");
 const modal2 = document.getElementById("modal2");
@@ -198,6 +220,9 @@ arrowLeft.addEventListener("click", function () {
   modal1.style.display = "flex";
 });
 
+// ---------------------------------------------------------
+// SECTION 13: GESTION DE L'UPLOAD D'IMAGES
+// ---------------------------------------------------------
 document.getElementById("photo-upload").addEventListener("change", function (event) {
   const fileUpload = document.querySelector(".file-upload");
   const photoLimits = document.querySelector(".photo-limits");
@@ -223,6 +248,9 @@ document.getElementById("photo-upload").addEventListener("change", function (eve
   }
 });
 
+// ---------------------------------------------------------
+// SECTION 14: CREATION DU FORMULAIRE POUR LES CATEGORIES
+// ---------------------------------------------------------
 async function createFormCategories() {
   const categories = await getCategories();
   console.log(categories);
@@ -241,6 +269,9 @@ async function selectCategories(categories) {
   });
 }
 
+// ---------------------------------------------------------
+// SECTION 15: REINITIALISATION DE LA MODALE D'UPLOAD D'IMAGES
+// ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", createFormCategories);
 
 function resetModal2() {
@@ -268,6 +299,9 @@ function resetModal2() {
   categoryErrorMessage.style.display = "none";
 }
 
+// ---------------------------------------------------------
+// SECTION 16: VALIDATION DU FORMULAIRE D'UPLOAD D'IMAGES
+// ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
   const validateButton = document.querySelector(".validate");
   const photoUploadInput = document.getElementById("photo-upload");
@@ -346,6 +380,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       setModalImages(work);
       postWork(file, photoTitle, category);
+      const modal = document.getElementById("modal2"); // Remplacez par l'ID de votre modale
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
       resetModal2();
     } else {
       console.log("Formulaire non validé, réinitialisation annulée.");
@@ -353,6 +390,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// ---------------------------------------------------------
+// SECTION 17: GESTION DES ETATS DU BOUTON DE VALIDATION
+// ---------------------------------------------------------
 const photoUploadInput = document.getElementById("photo-upload");
 const photoTitleInput = document.getElementById("photo-title");
 const categoryInput = document.getElementById("category");
