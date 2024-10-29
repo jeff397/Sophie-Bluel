@@ -380,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       setModalImages(work);
       postWork(file, photoTitle, category);
-      const modal = document.getElementById("modal2"); // Remplacez par l'ID de votre modale
+      const modal = document.getElementById("modal2"); 
       modal.style.display = "none";
       modal.setAttribute("aria-hidden", "true");
       resetModal2();
