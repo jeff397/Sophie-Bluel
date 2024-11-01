@@ -45,30 +45,24 @@ async function deleteWork(work, token) {
     return res.ok;
 }
 
-async function postWork(file, photoTitle, category) {
-    const url = 'http://localhost:5678/api/works';
-    const formData = new FormData();
-    if (file) {
-        formData.append('image', file);
-    }
-    formData.append('title', photoTitle);
-    formData.append('category', category);
+async function postWork(file, title, category) {
     const token = sessionStorage.getItem("token");
-    const res = await fetch(url, {
-        method: 'POST',
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("title", title);
+    formData.append("category", category);
+
+    const res = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
         headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`
         },
-        body: formData,
+        body: formData
     });
+
     if (res.ok) {
-        const data = await res.json();
-        addImageToGallery(data);
-        return data;
-
-    } else {
-
-        alert("Échec de l'upload. Veuillez réessayer.");
+        const newWork = await res.json();        
+        createGallery(); 
     }
 }
+

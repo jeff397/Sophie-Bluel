@@ -191,8 +191,7 @@ async function callDeleteWork(work) {
     await createGallery();
     document.querySelector(".modal-gallery").innerHTML = "";
     const works = await getWorks();
-    works.forEach(setModalImages);
-    resetModal2();
+    works.forEach(setModalImages);  
   } else {
     alert("ça n'a pas marché");
   }
